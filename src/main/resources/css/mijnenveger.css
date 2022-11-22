@@ -1,0 +1,24 @@
+#rooster{
+
+}
+.one{
+    -fx-fill: blue;
+    -fx-font-size: 20px;
+}
+.two{
+    -fx-fill: red;
+    -fx-font-size: 20px;
+}
+.three{
+    -fx-fill: purple;
+    -fx-font-size: 20px;
+}
+.four{
+    -fx-fill: orange;
+    -fx-font-size: 20px;
+}
+.bom{
+    -fx-background-color: green;
+}
+
+
