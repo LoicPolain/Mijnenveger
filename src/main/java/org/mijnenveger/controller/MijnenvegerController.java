@@ -2,9 +2,7 @@ package org.mijnenveger.controller;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,6 +14,8 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MijnenvegerController {
 
@@ -102,11 +102,24 @@ public class MijnenvegerController {
         winConditionLst.add("bom");
         winConditionLst.add("flag");
 
+        AtomicBoolean win = new AtomicBoolean(false);
+        AtomicInteger i = new AtomicInteger();
+
         rooster.getChildren().forEach((node) -> {
             if (node.getClass().getSimpleName().equals("Button") && node.getStyleClass().containsAll(winConditionLst)) {
-                System.out.println("you win!");
+                i.incrementAndGet();
+
+                win.set(true);
             }
+            else win.set(false);
         });
+        System.out.println("win: " + win.get() + "number: " + i);
+
+        if (win.get()){
+            Text textWin = new Text("You win!!!");
+            rooster.getChildren().clear();
+            rooster.getChildren().add(textWin);
+        }
     }
     public void click(Event e){
         winCondition();
