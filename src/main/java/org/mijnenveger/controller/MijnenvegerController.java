@@ -73,6 +73,7 @@ public class MijnenvegerController {
     }
 
     public void mark(MouseEvent n) {
+
         Button button = (Button) n.getSource();
 
         if (button.getText().equals("?")) {
@@ -80,6 +81,7 @@ public class MijnenvegerController {
             button.setText(" ");
         }
         else if (button.getText().isEmpty()){
+            button.getStyleClass().remove("flag");
             button.setGraphic(null);
             button.setText("?");
         }
@@ -87,14 +89,24 @@ public class MijnenvegerController {
             Image flag = new Image(getClass().getResourceAsStream("/media/image/red-flag.png"));
             ImageView view = new ImageView(flag);
             button.setText("");
+            button.getStyleClass().add("flag");
             view.setFitHeight(15);
             view.setFitWidth(15);
             button.setGraphic(view);
         }
+        winCondition();
     }
 
     public void winCondition(){
-        
+        List<String> winConditionLst = new ArrayList<>();
+        winConditionLst.add("bom");
+        winConditionLst.add("flag");
+
+        rooster.getChildren().forEach((node) -> {
+            if (node.getClass().getSimpleName().equals("Button") && node.getStyleClass().containsAll(winConditionLst)) {
+                System.out.println("you win!");
+            }
+        });
     }
     public void click(Event e){
         winCondition();
